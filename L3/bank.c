@@ -57,7 +57,3 @@ void add_revenue (customer *customers, int n, int min_balance, int amount)
         }
     }
 }
-
-
-// Write a function to add $100 in the balance of all the customers  
-// in their balance and then print the incremented value of their balance
