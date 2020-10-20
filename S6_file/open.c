@@ -22,11 +22,16 @@ int main (void)
     {
         return 1;
     }
-    char ch;
-    while ((ch = fgetc(ptr2)) != EOF)
-    {
-        printf("%c\n", ch);
-    }
+    // char ch;
+    // while ((ch = fgetc(ptr2)) != EOF)
+    // {
+    //     printf("%c\n", ch);
+    // }
+    char str[2];
+    fgets(str, 2, ptr2);
+    printf("%s\n", str);
+    fgets(str, 2, ptr2);
+    printf("%s\n", str);
     fclose(ptr2);
     return 0;
 }
