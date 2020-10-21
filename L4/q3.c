@@ -29,5 +29,7 @@ int main(void)
         }
     }
     printf("Number of words = %d\nNumber of chars = %d\n", words, chars);  
+    fclose(ptr);
+    printf("The file is now closed.\n");
     return 0;
 }

@@ -21,11 +21,11 @@ int main()
     }
     // write data to the file 
     fputs(name, ptr);
-    fputs("\n", ptr);
+    fputc('\n', ptr);
     fputs(age, ptr);
-    fputs("\n", ptr);
+    fputc('\n', ptr);
     fputs(salary, ptr);
-    fputs("\n", ptr);
+    fputc('\n', ptr);
 
     // Closing the file
     fclose(ptr);
