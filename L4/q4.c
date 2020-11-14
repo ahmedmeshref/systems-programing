@@ -25,7 +25,6 @@ int main(void)
     // repalce line and return 0 if successful, 1 otherwise.
     if (replace_line(fName, text, lineNum) == 1) return 1;
     else return 0;
-    
 }
 
 int replace_line (char fName[], char newLine[], int lineNum)
