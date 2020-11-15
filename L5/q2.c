@@ -71,7 +71,6 @@ int main(void)
         // extract the row's and col's num from the given cell
         int col = ((int)toupper(cell_num[0])) - 'A';
         int row = ((int)(cell_num[1] - '0')) - 1;
-        printf("%d, %d\n", row, col);
 
         // validate the row and col numbers
         if (validate_cell(row, col) == 1)
