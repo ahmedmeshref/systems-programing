@@ -1,3 +1,9 @@
+/*
+ * Write a C program that will catch this signal and run your defined signal handler.
+ *  The program should not terminate when Ctrl+Z is pressed. It prints a message and
+ *  continues execution.
+*/
+
 #include <stdio.h>
 #include <signal.h>
 #include <unistd.h>
