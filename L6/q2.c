@@ -14,7 +14,7 @@ int get_age(void)
 
     while (1)
     {
-        printf("Age: ");
+        printf("Enter your age: ");
         result = scanf("%d", &num);
         if (result == 0)
         {

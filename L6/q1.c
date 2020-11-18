@@ -3,15 +3,13 @@
  *  The program should not terminate when Ctrl+Z is pressed. It prints a message and
  *  continues execution.
 */
-
 #include <stdio.h>
 #include <signal.h>
 #include <unistd.h>
 
-int handle_sigtsip(int signal)
+void handle_sigtsip(int signal)
 {
-    printf("signal %d was caught.\n", signal);
-    return 0;
+    printf("\nsignal %d was caught.\n", signal);
 }
 
 int main(void)
@@ -24,6 +22,3 @@ int main(void)
     }
     return 0;
 }
-
-// TODO: create a calc with threads and try to see if you can 
-//  run multiple functions at once with sleep()
