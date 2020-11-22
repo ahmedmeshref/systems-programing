@@ -22,8 +22,8 @@ fi
 # get the user branch 
 read -p "your branch [q to exit]: " branch
 
-if [ branch == 'q' ]; then 
-    printf "${RED}Quit before push${NC}\n"
+if [ "$branch" == "q" ] || [ "$branch" == "Q" ]; then 
+    printf "${RED}Quit without push${NC}\n"
     exit 
 else
     git push -u origin $branch
