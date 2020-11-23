@@ -7,12 +7,14 @@ echo "hello world!"
 name="Ahmed"
 echo "My name is $name"
 
-# PWD 
-echo "Working dir: $PWD"
+# print the current working directory from env var
+echo "$PWD"
+# print the current working using command pwd
+echo $(pwd)
 
 # Get user name 
 read -p "username: " name
 echo "Your username: $name"
 # silent variable 
 read -sp "Password: " password
-echo "Successful!"
+printf "\nSuccessful!\n"

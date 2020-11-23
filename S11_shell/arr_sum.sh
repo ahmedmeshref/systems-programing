@@ -2,9 +2,9 @@
 
 os=(60 20 30 40 50)
 
-x=0
+sum=0
 
 for i in "${os[@]}"; do
-    x=$((x + i))
-    printf "Current sum = ${x}\n"
+    sum=$(( i + sum ))
+    printf "Current sum = ${sum}\n"
 done
