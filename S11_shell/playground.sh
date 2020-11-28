@@ -13,3 +13,13 @@ if [ $name == "ahmed" ]; then
 else
     printf "Go away!\n"
 fi
+
+
+num=10
+
+for i in 2 3 4 
+do 
+    (( num++ ))
+done
+
+echo "Num= $num"
