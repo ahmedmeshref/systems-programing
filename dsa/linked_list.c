@@ -24,8 +24,7 @@ node *prepend(node *head, int num)
 
     if (head != NULL)
     {
-        node *temp = head;
-        n->next = temp;
+        n->next = head;
     }
     else
     {
