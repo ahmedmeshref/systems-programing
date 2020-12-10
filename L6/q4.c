@@ -61,7 +61,7 @@ int createProcesses(void)
         if (pid == 0)
         {
             // run a loop inside of the child
-            loop(1000);
+            loop();
             exit(0);
         }
         else if (pid < 0)
