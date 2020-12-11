@@ -3,7 +3,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <string.h>
-#include<sys/wait.h> 
+#include <sys/wait.h>
 
 // Define global variables
 enum
@@ -57,8 +57,8 @@ int words_occurance(char fName[], int fd[])
     // close the file
     fclose(ptr);
     printf("File closed successfully\n");
-    
-    /* store results in the pipe. */ 
+
+    /* store results in the pipe. */
     // close reading end of first pipe.
     close(fd[0]);
 
@@ -71,7 +71,7 @@ int words_occurance(char fName[], int fd[])
 
     // Close writing end of pipe
     close(fd[1]);
-    exit(0);  
+    exit(0);
 }
 
 int main(void)
@@ -106,15 +106,15 @@ int main(void)
         // call teh words_occurance function
         words_occurance(fName, fd);
     }
-    // parent process to read the occurance from the pipe 
+    // parent process to read the occurance from the pipe
     else
     {
         int last_ind;
         char words[MAXWORDS][MAXWORDLEN];
         int wordsCount[MAXWORDS];
-        
-        // Wait for child to send data 
-        wait(NULL); 
+
+        // Wait for child to send data
+        wait(NULL);
 
         // close writing end of the pipe
         close(fd[1]);
@@ -124,7 +124,10 @@ int main(void)
         read(fd[0], words, sizeof(words));
         read(fd[0], wordsCount, sizeof(wordsCount));
 
-        // print found words and their occurance
+        // close reading end of the pipe
+        close(fd[0]);
+
+        // print unqiue words and their number of occurance
         for (int i = 0; i < last_ind; i++)
         {
             printf("%s: %d\n", words[i], wordsCount[i]);
