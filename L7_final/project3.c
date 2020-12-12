@@ -1,9 +1,8 @@
-#include <stdio.h> 
+#include <stdio.h>
 #include <stdlib.h>
-#include <sys/types.h> 
-#include <unistd.h> 
+#include <sys/types.h>
+#include <unistd.h>
 #include <sys/wait.h>
-
 
 int createProcesses(int n)
 {
@@ -29,9 +28,18 @@ int createProcesses(int n)
     return 0;
 }
 
-
-int main()
+int main(int argc, char **argv)
 {
-    createProcesses(10);
+    if (argc < 2)
+    {
+        printf("Error: Number of process to create is missing.\n");
+        return 1;
+    }
+
+    int num_process = atoi(argv[1]);
+
+    printf("Num of process: %d\n", num_process);
+
+    createProcesses(num_process);
     return 0;
 }
