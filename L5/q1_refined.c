@@ -6,13 +6,11 @@
 #include <sys/wait.h>
 
 // Define global variables
-enum
-{
-    MIN_LINE_LEN = 75,
-    MAX_LINE_LEN = 150,
-    MAX_WORDS_PER_LINE = 20,
-    MAX_WORD_LEN = 40
-};
+
+const int MIN_LINE_LEN = 75;
+const int MAX_LINE_LEN = 150;
+const int MAX_WORDS_PER_LINE = 20;
+const int MAX_WORD_LEN = 40;
 
 int getTotalChars(FILE *fp)
 {
@@ -26,7 +24,7 @@ int getTotalChars(FILE *fp)
     return charsCount;
 }
 
-int countWords(char buffer[], int *fd)
+int countWords(char buffer[], int fd[])
 {
 
     char *pch;
@@ -144,12 +142,18 @@ int main(void)
     // Wait for all child processes to send data
     wait(NULL);
 
-    // combine the pipe content.
+    /* combine the content of all pipes. */
+    // define vars  
+    char allWords[200][MAX_WORD_LEN];
+    int allWordsCount[200];
+    int wordsLastIndex = 0;
+
+    // read the content of each pipe  
     for (int i = 0; i < currLine; i++)
     {
         int last_ind;
-        char words[200][MAX_WORD_LEN];
-        int wordsCount[200];
+        char words[MAX_WORDS_PER_LINE][MAX_WORD_LEN];
+        int wordsCount[MAX_WORDS_PER_LINE];
         // close writing end of the pipe
         close(fd[i][1]);
 
@@ -164,10 +168,30 @@ int main(void)
         // print unqiue words and their number of occurance
         for (int i = 0; i < last_ind; i++)
         {
-            printf("%s: %d\n", words[i], wordsCount[i]);
+            int seen = 0;
+            // look for the word in all seen words (ALL_WORDS)
+            for (int j = 0; j < wordsLastIndex; j++)
+            {
+                if (strcmp(words[i], allWords[j]) == 0)
+                {
+                    allWordsCount[j] += wordsCount[i];
+                    seen = 1;
+                    break;
+                }
+            }
+            if (!seen)
+            {
+                allWordsCount[wordsLastIndex] = wordsCount[i];
+                strcpy(allWords[wordsLastIndex], words[i]);
+                wordsLastIndex++;
+            }
         }
+    }
 
-        printf("-----------------------------------------------\n");
+    // print all found words alongside with their occurance
+    for (int i = 0; i < wordsLastIndex; i++)
+    {
+        printf("%s: %d\n", allWords[i], allWordsCount[i]);
     }
 
     return 0;
