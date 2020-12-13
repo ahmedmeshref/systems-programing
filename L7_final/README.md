@@ -22,7 +22,7 @@ Requirements:
 ## Run 
 - Navigate to the project directory 
 
-- From your terminal, run ```gcc processes.c -lpthread && ./p {NUMBER_OF_PROCESSES}``` 
+- From your terminal, run ```gcc processes.c -lpthread && ./a.out {NUMBER_OF_PROCESSES}``` 
 OR 
 Use the make file to compile and execute the file. 
 - From your terminal, run ```make compile && make run```
