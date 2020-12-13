@@ -20,6 +20,7 @@ void show_grid(char grid[9][9][50], char *cellnum, char *p_val)
 
     for (int i = 1; i <= GRIDROWS; i++)
     {
+        // print the row number 
         printf("\n%d", i);
         for (int j = 0; j < GRIDCOLS; j++)
         {

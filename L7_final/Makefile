@@ -1,7 +1,7 @@
 compile: 
-	gcc -o o project3.c -lpthread
+	gcc processes.c -lpthread
 
 test:
-	./o 2
-	./o 4
-	./o 8
+	./a.out 2
+	./a.out 4
+	./a.out 8
