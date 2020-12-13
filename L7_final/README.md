@@ -24,9 +24,8 @@ Requirements:
 
   - From your terminal, run ```gcc processes.c -lpthread && ./a.out {NUMBER_OF_PROCESSES}``` 
   
-  OR 
+  OR use the make file to compile and execute the file as follows. 
   
-  Use the make file to compile and execute the file. 
   - From your terminal, run ```make compile && make run```
 > Note: make run passes a default number of process, 10. 
 
