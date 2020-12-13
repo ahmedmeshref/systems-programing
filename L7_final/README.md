@@ -32,9 +32,9 @@ Use the make file to compile and execute the file.
 > Note: all pre built tests are using default values of 2, 4, and 8 for the number of created processes.
 - Navigate to the project directory 
 
-- From your terminal, run ```./test_automation.c```
+-- From your terminal, run ```./test_automation.sh```
 OR 
-- From your terminal, run ```make compile && make test```
+-- From your terminal, run ```make compile && make test```
 
 ## Owner 
 - [Ahmed Meshref](https://github.com/ahmedmeshref) 
