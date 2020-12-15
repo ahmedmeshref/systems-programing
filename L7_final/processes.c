@@ -12,34 +12,32 @@ int createProcesses(int n)
         pid_t id = fork();
         if (id == 0) // creation of child process successed.
         {
-            printf("hello. My pid: %d\n", getpid());
+            printf("Child process -> pid: %d | parent pid: %d.\n", getpid(), getppid());
             exit(0);
         }
         else if (id < 0) // creation of child process failed.
         {
-            printf("Error, faild to create a process.\n");
+            printf("Error, faild to create a child process.\n");
             return 1;
         }
     }
-
-    wait(NULL); // wait for processes to finish executation
-
-    return 0;
 }
 
 int createNestedProcesses(int n)
 {
     if (n == 0) // base case (last child).
     {
-        printf("Hello From the last child process.\n");
+        printf("Last process -> pid: %d | parent pid: %d.\n", getpid(), getppid());
         exit(0);
     }
     // create a new processes
     pid_t id = fork();
     if (id == 0) // creation of child process successed.
     {
+        printf("Child process num %d -> pid: %d | parent pid: %d.\n", n, getpid(), getppid());
         // recursivly call the createNestedProcesses function to create n nested processes
-        return createNestedProcesses(n - 1);
+        createNestedProcesses(n - 1);
+        printf("Exit -> Child process num %d -> pid: %d | parent pid: %d.\n", n, getpid(), getppid());
         exit(0);
     }
     else if (id < 0) // creation of child process failed.
@@ -47,8 +45,6 @@ int createNestedProcesses(int n)
         printf("Error, faild to create a process.\n");
         return 1;
     }
-
-    wait(NULL); // wait for processes to end
 }
 
 int main(int argc, char **argv)
@@ -59,13 +55,21 @@ int main(int argc, char **argv)
         return 1;
     }
 
+    pid_t wpid;
+    int status = 0;
+
     int num_process = atoi(argv[1]);
 
-    printf("--------------------- Num Of Processes: %d ---------------------\n", num_process);
-
+    printf("\n---------- Creating %d Processes by parent: %d ----------\n", num_process, getpid());
     createProcesses(num_process);
 
+    while ((wpid = wait(&status)) > 0); // wait for processes to finish executation
+    printf("---------- Parent pid: %d done creating %d processes ----------\n", getpid(), num_process);
+
+    printf("---------- Creating %d chained Processes by parent %d ----------\n", num_process, getpid());
     createNestedProcesses(num_process);
+    wait(NULL);
+    printf("---------- Back to Parent pid: %d ----------\n\n", getpid());
 
     return 0;
 }
