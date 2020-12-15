@@ -27,12 +27,12 @@ int createNestedProcesses(int n)
 {
     if (n == 0) // base case (last child).
     {
-        printf("Last process -> pid: %d | parent pid: %d.\n", getpid(), getppid());
+        printf("Last process. parent pid: %d.\n", getppid());
         return 0;
     }
     // create a new processes
     pid_t id = fork();
-    if (id == 0) // creation of child process successed.
+    if (id == 0) // child process.
     {
         printf("Child process num %d -> pid: %d | parent pid: %d.\n", n, getpid(), getppid());
         // recursivly call the createNestedProcesses function to create n nested processes
@@ -45,7 +45,7 @@ int createNestedProcesses(int n)
         printf("Error, faild to create a process.\n");
         return 1;
     }
-    else
+    else  // parent process
     {
         wait(NULL);
     }
@@ -64,15 +64,14 @@ int main(int argc, char **argv)
 
     int num_process = atoi(argv[1]);
 
-    // printf("\n---------- Creating %d Processes by parent: %d ----------\n", num_process, getpid());
-    // createProcesses(num_process);
+    printf("---------- Creating %d Processes by parent: %d ----------\n", num_process, getpid());
+    createProcesses(num_process);
+    while ((wpid = wait(&status)) > 0); // wait for processes to finish executation
+    printf("---------- Done creating %d processes by parent: %d ----------\n", num_process, getpid());
 
-    // while ((wpid = wait(&status)) > 0); // wait for processes to finish executation
-    // printf("---------- Parent pid: %d done creating %d processes ----------\n", getpid(), num_process);
-
-    printf("---------- Creating %d chained Processes by parent %d ----------\n", num_process, getpid());
+    printf("---------- Creating %d chained Processes by parent: %d ----------\n", num_process, getpid());
     createNestedProcesses(num_process);
-    printf("---------- Back to Parent pid: %d ----------\n\n", getpid());
+    printf("---------- Done creating %d chained processes by parent: %d  ----------\n\n", num_process, getpid());
 
     return 0;
 }
